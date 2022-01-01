@@ -58,8 +58,8 @@ def train_model():
   model.fit([training_images, csv_data], labels, epochs=32, batch_size=32, callbacks=es)
   return model
 
-model = train_model()
-model.save("saved_model_v2")
+# model = train_model()
+# model.save("saved_model_v2")
 
 model = keras.models.load_model("saved_model_v2")
 def predict(training_image, csv_row):
