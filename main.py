@@ -3,15 +3,15 @@ import webcam
 from model import predict
 import numpy as np
 from win32api import GetSystemMetrics
+from calibrate_ui import rel_pos_x, rel_pos_y
 
 def main():
     cam = webcam.WebCam()
     cam_thread = cam.run()
-    block = make_label()
+    block = make_label(200)
     block.pack()
-    dev = .3
-    x_coords = GetSystemMetrics(0)*np.array([.5-dev, .5+dev, .5-dev, .5+dev])
-    y_coords = GetSystemMetrics(1)*np.array([.5-dev, .5-dev, .5+dev, .5+dev])
+    x_coords = GetSystemMetrics(0)*np.array(rel_pos_x)
+    y_coords = GetSystemMetrics(1)*np.array(rel_pos_y)
     while cam_thread.is_alive():
         data = cam.get_data()
         if not data is None:

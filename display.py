@@ -1,10 +1,10 @@
 import tkinter, win32api, win32con, pywintypes
 from PIL import Image, ImageTk
 
-def make_label():
+def make_label(size):
     window = tkinter.Tk()
     emoji = Image.open("eggplant.png")
-    emoji = ImageTk.PhotoImage(emoji.resize((300, 300), Image.ANTIALIAS))
+    emoji = ImageTk.PhotoImage(emoji.resize((size, size), Image.ANTIALIAS))
     label = tkinter.Label(image=emoji)
     label.image = emoji
     label.master.overrideredirect(True)
