@@ -8,13 +8,14 @@ from calibrate_ui import rel_pos_x, rel_pos_y
 def main():
     cam = webcam.WebCam()
     cam_thread = cam.run()
+    # return
     block = make_label(400)
     block.pack()
     x_coords = GetSystemMetrics(0)*np.array(rel_pos_x)
     y_coords = GetSystemMetrics(1)*np.array(rel_pos_y)
     # if using v1 model, only need 4 calibration points
-    # x_coords = x_coords[:4]
-    # y_coords = y_coords[:4]
+    x_coords = x_coords[:4]
+    y_coords = y_coords[:4]
     border_weight = 2
     while cam_thread.is_alive():
         data = cam.get_data()

@@ -3,7 +3,7 @@ from PIL import Image, ImageTk
 
 def make_label(size):
     window = tkinter.Tk()
-    emoji = Image.open("eggplant.png")
+    emoji = Image.open("smile.png")
     emoji = ImageTk.PhotoImage(emoji.resize((size, size), Image.ANTIALIAS))
     label = tkinter.Label(image=emoji)
     label.image = emoji
