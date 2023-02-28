@@ -30,22 +30,23 @@ def train_model():
   # create cnn
   inputs = keras.Input(shape=image_shape)
   x = layers.Rescaling(1.0/255)(inputs)
-  for filters in 8, 16:
+  for filters in 8, 16, 32:
     x = layers.Conv2D(filters, (3, 3), activation="relu", padding="same")(x)
     x = layers.MaxPooling2D(pool_size=(2, 2))(x)
-    x = layers.Dropout(0.25)(x)
+    x = layers.Dropout(0.2)(x)
   x = layers.Flatten()(x)
-  x = layers.Dense(16, activation="relu")(x)
+  x = layers.Dense(64, activation="relu")(x)
   x = layers.Dropout(0.5)(x)
   x = layers.Dense(4, activation="softmax")(x)
   model = keras.Model(inputs, x)
 
   # compile cnn
   model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-  # es = keras.callbacks.EarlyStopping(monitor="accuracy", patience=3, verbose=1)
-  model.fit(training_images, labels, epochs=32, batch_size=32)
+  es = keras.callbacks.EarlyStopping(monitor="accuracy", patience=3, verbose=1)
+  model.fit(training_images, labels, epochs=32, batch_size=32, callbacks=es)
   return model
 
+# uncomment to train model
 # model = train_model()
 # model.save("model_v1")
 
